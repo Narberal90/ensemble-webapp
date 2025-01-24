@@ -1,0 +1,31 @@
+[tool.poetry]
+name = "ensemble-webapp"
+version = "0.1.0"
+description = ""
+authors = ["Narberal90 <mordegear90@gmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.12"
+django = "^5.1.4"
+djangorestframework = "^3.15.2"
+cloudinary = "^1.41.0"
+django-phonenumber-field = "^8.0.0"
+phonenumberslite = "^8.13.51"
+djangorestframework-simplejwt = "^5.3.1"
+django-cors-headers = "^4.6.0"
+django-tinymce = "^4.1.0"
+python-dotenv = "^1.0.1"
+
+
+[tool.poetry.group.dev.dependencies]
+black = "^24.10.0"
+flake8 = "^7.1.1"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.black]
+line-length = 79
+target-version = ["py312"]
