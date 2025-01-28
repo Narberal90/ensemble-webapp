@@ -1,7 +1,9 @@
-import React, {useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import "../styles/components/Gallery.css";
 import ScrollToTop from "../components/ScrollToTop.jsx";
 import Navigation from "../components/Navigation.jsx";
+import { Gallery, Item } from "react-photoswipe-gallery";
+import "photoswipe/style.css";
 
 const GalleryPage = () => {
     const [images, setImages] = useState([]);
@@ -14,19 +16,36 @@ const GalleryPage = () => {
     }, []);
 
     return (
-
         <div className="gallery">
-            <Navigation/>
+            <Navigation />
             <div className="gallery-section">
-                <div className="image-gallery">
-                    {images.map((image) => (
-                        <div key={image.id} className="image-item">
-                            <img src={image.image_url} alt={`Image ${image.id}`}/>
-                        </div>
-                    ))}
-                </div>
+                <Gallery>
+                    <div className="image-gallery">
+                        {images.map((image) => (
+                            <Item
+                                key={image.id}
+                                original={image.image_url}
+                                thumbnail={image.image_url}
+                                width={image.width}
+                                height={image.height}
+                            >
+                                {({ ref, open }) => (
+                                    <div className="image-item">
+                                        <img
+                                            ref={ref}
+                                            onClick={open}
+                                            src={image.image_url}
+                                            alt={`Image ${image.id}`}
+                                            className="cursor-pointer rounded shadow"
+                                        />
+                                    </div>
+                                )}
+                            </Item>
+                        ))}
+                    </div>
+                </Gallery>
             </div>
-            <ScrollToTop/>
+            <ScrollToTop />
         </div>
     );
 };

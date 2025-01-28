@@ -2,6 +2,7 @@ import cloudinary
 from cloudinary.models import CloudinaryField
 from cloudinary.utils import cloudinary_url
 from django.db import models
+from django.db.models.fields import PositiveIntegerField
 from tinymce.models import HTMLField
 
 
@@ -32,16 +33,12 @@ class Post(ImageMixin, models.Model):
 
 class Image(ImageMixin, models.Model):
     image = CloudinaryField("image")
+    ordering = PositiveIntegerField(default=0)
 
     class Meta:
-        ordering = ["-id"]
+        ordering = ["ordering"]
 
     def __str__(self):
-        return f"Image {self.id})"
+        return f"Image {self.id} - Order: {self.ordering}"
 
-    def save(self, *args, **kwargs):
-        if self.pk:
-            old_image = Image.objects.filter(pk=self.pk).first().image
-            if old_image and old_image != self.image:
-                cloudinary.uploader.destroy(old_image.public_id)
-        super().save(*args, **kwargs)
+

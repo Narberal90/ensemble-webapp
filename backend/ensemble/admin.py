@@ -26,7 +26,9 @@ class ImageAdmin(admin.ModelAdmin):
     list_display = (
         "image_thumbnail",
         "full_image_url",
+        "ordering",
     )
+    list_editable = ("ordering",)
 
     def image_thumbnail(self, obj):
         return format_html(
